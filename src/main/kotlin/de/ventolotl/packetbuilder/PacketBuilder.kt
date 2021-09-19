@@ -112,7 +112,7 @@ class Builder(
     val chatComponent = ChatComponentWriter(packet, indexer)
 }
 
-infix fun <T : Any> Writer<T>.to(value: T) {
+infix fun <T : Any> Writer<T>.with(value: T) {
     invoke(value)
 }
 
