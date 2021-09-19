@@ -99,10 +99,7 @@ class ModernPositionWriter(
     indexer: Indexer,
 ) : PositionWriter(IndexEntry.DOUBLE, packet, indexer) {
     override fun invoke(value: Vector) {
-        packet.doubles
-            .write(next(), value.x)
-            .write(next(), value.y)
-            .write(next(), value.z)
+        packet.doubles.write(next(), value.x).write(next(), value.y).write(next(), value.z)
     }
 }
 
