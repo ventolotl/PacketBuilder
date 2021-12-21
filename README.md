@@ -7,7 +7,7 @@ val packet = PacketBuilder.with(<PacketType>) {
     // Insert content
 }
 packet.send(player) // Sends the packet to the specified player
-packet.send(player) // Sends the packet to the specified players
+packet.send(players) // Sends the packet to the specified players
 packet.sendExcept(player) // Sends the packet to everyone except the specified player
 ```
 
