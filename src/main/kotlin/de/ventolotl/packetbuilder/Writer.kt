@@ -32,15 +32,7 @@ class IntArrayWriter(
     indexer: Indexer,
 ) : Writer<Array<Int>>(IndexEntry.INT_ARRAY, packet, indexer) {
     override fun invoke(value: Array<Int>) {
-        packet.integerArrays.write(next(), value.toIntArray())
-    }
-
-    private fun Array<Int>.toIntArray(): IntArray {
-        val intArray = IntArray(this.size)
-        for ((i, value) in this.withIndex()) {
-            intArray[i] = value
-        }
-        return IntArray(this.size)
+        packet.integerArrays.write(next(), value.toList().toIntArray())
     }
 
     operator fun invoke(vararg values: Int) {
@@ -86,9 +78,10 @@ abstract class PositionWriter(
             packet: PacketContainer,
             indexer: Indexer,
         ): PositionWriter {
-            return when (MinecraftVersion.COMBAT_UPDATE.atOrAbove()) {
-                true -> ModernPositionWriter(packet, indexer)
-                false -> LegacyPositionWriter(packet, indexer)
+            return if (MinecraftVersion.COMBAT_UPDATE.atOrAbove()) {
+                ModernPositionWriter(packet, indexer)
+            } else {
+                LegacyPositionWriter(packet, indexer)
             }
         }
     }
